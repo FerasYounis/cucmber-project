@@ -20,5 +20,7 @@ Feature: loan offers
   @RestReady @Regression @Smoke @StoryTIcket-1235 @WebMissing
   Scenario: Check if the loan application exists and do contract testing for the response
     When Check loan exist by id "b8096ec7-2150-405f-84f5-ae99864b3e96" and Side Effects is set to "ture"
-#    Then validate details of the loan
+    When Check loan exist by id "b8096ec7-0000-405f-84f5-ae99864b3e96" does not exist and got 404 response
+
+
 

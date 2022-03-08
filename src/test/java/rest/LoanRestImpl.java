@@ -3,9 +3,12 @@ package rest;
 
 import java.util.UUID;
 
+import org.testng.Assert;
+
 import io.restassured.RestAssured;
 import io.restassured.http.Header;
 import io.restassured.response.Response;
+import io.restassured.response.ResponseBody;
 import io.restassured.response.ValidatableResponse;
 
 
@@ -15,6 +18,7 @@ import static org.hamcrest.Matchers.anyOf;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
+import static utilities.GlobalConstants.getLoanByIdApiURL;
 
 
 public class LoanRestImpl
@@ -25,14 +29,34 @@ public class LoanRestImpl
 //		Response response = (Response) RestAssured.post("https://credapi.credify.tech/api/brfunnelorch/v2/resume/byLeadSecret)");
 		Header headerSource = new Header("x-cf-source-id","coding-challenge");
 		Header headercorr = new Header("x-cf-corr-id", UUID.randomUUID().toString());
-		Header headercorr2 = new Header("x-cf-corr-id", "Any random UUID");
 
 
 		ValidatableResponse personal_loan = given().header(headerSource).header(headercorr).contentType("application/json").body("\n"
 				+ "{   \"loanAppUuid\":"+id+",\n" + "   \"skipSideEffects\":"+String.valueOf(skipEffects)+"}")
-				.post("https://credapi.credify.tech/api/brfunnelorch/v2/resume/byLeadSecret")
+				.post(getLoanByIdApiURL)
 				.then().statusCode(200).body("loanAppResumptionInfo.productType", equalTo("PERSONAL_LOAN"))
 				.body("loanAppResumptionInfo.borrowerResumptionInfo.firstName",not("Feras"));
-		return null;
+
+
+		Response response = given().header(headerSource).header(headercorr).contentType("application/json")
+				.body("\n" + "{   \"loanAppUuid\":"+id+",\n" + "   \"skipSideEffects\":"+String.valueOf(skipEffects)+"}")
+				.post(getLoanByIdApiURL).thenReturn();
+
+
+
+
+
+		return response;
 	}
+
+	public void getLoanDoesNotExistById(String id)
+	{
+		Header headerSource = new Header("x-cf-source-id","coding-challenge");
+		Header headercorr = new Header("x-cf-corr-id", UUID.randomUUID().toString());
+		ValidatableResponse personal_loan = given().header(headerSource).header(headercorr).contentType("application/json").body("\n"
+						+ "{   \"loanAppUuid\":"+id+",\n" + "   \"skipSideEffects\":true}")
+				.post(getLoanByIdApiURL)
+				.then().statusCode(404);
+	}
+
 }

@@ -17,3 +17,4 @@ got to target/cucmber-reports and open index.html
 
 ### TODO
 * Add logging
+* Make Session class a Singleton
