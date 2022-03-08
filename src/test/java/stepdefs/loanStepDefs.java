@@ -154,7 +154,7 @@ public class loanStepDefs
 		validationService.GetLoanDetailsById(id,skipSideEffects);
 	}
 
-	@When("Check loan exist by id (.*) does not exist and got 404 response$")
+	@When("Check loan by id (.*) does not exist and got 404 response$")
 	public void checkLoanDoesNotExistById(String id){
 		validationService.GetLoanDetailsById(id);
 	}

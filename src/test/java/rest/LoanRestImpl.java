@@ -24,35 +24,19 @@ import static utilities.GlobalConstants.getLoanByIdApiURL;
 public class LoanRestImpl
 {
 
+	Header headerSource = new Header("x-cf-source-id","coding-challenge");
+	Header headercorr = new Header("x-cf-corr-id", UUID.randomUUID().toString());
+
 	public Response getLoanDetails(String id, boolean skipEffects)
 	{
-//		Response response = (Response) RestAssured.post("https://credapi.credify.tech/api/brfunnelorch/v2/resume/byLeadSecret)");
-		Header headerSource = new Header("x-cf-source-id","coding-challenge");
-		Header headercorr = new Header("x-cf-corr-id", UUID.randomUUID().toString());
-
-
-		ValidatableResponse personal_loan = given().header(headerSource).header(headercorr).contentType("application/json").body("\n"
-				+ "{   \"loanAppUuid\":"+id+",\n" + "   \"skipSideEffects\":"+String.valueOf(skipEffects)+"}")
-				.post(getLoanByIdApiURL)
-				.then().statusCode(200).body("loanAppResumptionInfo.productType", equalTo("PERSONAL_LOAN"))
-				.body("loanAppResumptionInfo.borrowerResumptionInfo.firstName",not("Feras"));
-
-
 		Response response = given().header(headerSource).header(headercorr).contentType("application/json")
 				.body("\n" + "{   \"loanAppUuid\":"+id+",\n" + "   \"skipSideEffects\":"+String.valueOf(skipEffects)+"}")
 				.post(getLoanByIdApiURL).thenReturn();
-
-
-
-
-
 		return response;
 	}
 
 	public void getLoanDoesNotExistById(String id)
 	{
-		Header headerSource = new Header("x-cf-source-id","coding-challenge");
-		Header headercorr = new Header("x-cf-corr-id", UUID.randomUUID().toString());
 		ValidatableResponse personal_loan = given().header(headerSource).header(headercorr).contentType("application/json").body("\n"
 						+ "{   \"loanAppUuid\":"+id+",\n" + "   \"skipSideEffects\":true}")
 				.post(getLoanByIdApiURL)

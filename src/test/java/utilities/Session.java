@@ -4,7 +4,6 @@ import groovy.lang.Singleton;
 import lombok.Getter;
 import lombok.Setter;
 
-
 @Setter
 @Getter
 public class Session

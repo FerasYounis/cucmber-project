@@ -8,7 +8,7 @@
 * Selenium 
 * TestNG
 
-## To run all tests "total two" from command line
+## To run all tests from command line
 ```bash
 mvn clean install
 ```
