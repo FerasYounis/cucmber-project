@@ -7,6 +7,7 @@ import org.picocontainer.MutablePicoContainer;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -40,7 +41,7 @@ public class loanStepDefs
 		pico.addComponent(validationService);
 	}
 
-//	@After
+	@After
 	@Test
 	public void cleanUp(){
 		baseTest.closeDriver();
@@ -53,7 +54,7 @@ public class loanStepDefs
 	}
 
 	@When("^loan borrower enter loan amount as (.*) and select (.*)$")
-	public void loan_borrower_enter_loan_amount_as_and_select(String amount, String purpose) {
+	public void loanBorrowerEnterLoanAmountPurpose(String amount, String purpose) {
 		navigationService.openPersonalLoanPage();
 		navigationService.enterAmount(amount);
 		navigationService.enterPurpose(purpose);
