@@ -41,9 +41,11 @@ public class loanStepDefs
 		pico.addComponent(validationService);
 	}
 
+
 	@After
 	@Test
 	public void cleanUp(){
+		session = null;
 		baseTest.closeDriver();
 	}
 
@@ -51,6 +53,7 @@ public class loanStepDefs
 
 	@Given("^Data setup loan offers$")
 	public void data_setup_loan_offers() {
+
 	}
 
 	@When("^loan borrower enter loan amount as (.*) and select (.*)$")

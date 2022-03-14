@@ -5,7 +5,7 @@ Feature: loan offers
 
   @WebReady @Regression @Smoke @HappyBath @StoryTicket-1234 @RestMissing
   Scenario Outline: A loan borrower, you can see loan offers after filling the required information
-    When loan borrower enter loan amount as "2000" and select "any purpose"
+    When loan borrower enter loan amount as LOAN_AMOUNT_2000 and select "any purpose"
     And Check your Rate
     And They fill out personal information <firstName> <lastName>, <address> <city> <state> <zipcode>, and <birthday>
     And They fill out financial situation <annualAmount> and <additionalAmount>
@@ -19,8 +19,8 @@ Feature: loan offers
 
   @RestReady @Regression @Smoke @StoryTIcket-1235 @WebMissing
   Scenario: Check if the loan application exists and do contract testing for the response
-    When Check loan exist by id "b8096ec7-2150-405f-84f5-ae99864b3e96" and Side Effects is set to "ture"
-    When Check loan by id "b8096ec7-0000-405f-84f5-ae99864b3e96" does not exist and got 404 response
+    When Check loan exist by id EXIST_LOAN_ID and Side Effects is set to true
+    When Check loan by id DOES_NOT_EXIST_LOAN_ID does not exist and got 404 response
 
 
 

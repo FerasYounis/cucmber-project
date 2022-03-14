@@ -6,8 +6,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import utilities.BasePage;
 
-import static utilities.GlobalConstants.loginPageURL;
-import static utilities.GlobalConstants.personalLoanPageURL;
+import static utilities.GlobalConstants.uriLoginPage;
 
 
 public class LogInPage extends BasePage<LogInPage>
@@ -28,7 +27,7 @@ public class LogInPage extends BasePage<LogInPage>
 
 	public static LogInPage open()
 	{
-		new LogInPage().get(loginPageURL);
+		new LogInPage().get(uriLoginPage);
 		return PageFactory.initElements(driver, LogInPage.class);
 	}
 

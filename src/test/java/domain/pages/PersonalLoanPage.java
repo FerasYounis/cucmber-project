@@ -7,7 +7,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import utilities.BasePage;
 
-import static utilities.GlobalConstants.personalLoanPageURL;
+import static utilities.GlobalConstants.uriPersonalLoanPage;
 
 
 public class PersonalLoanPage extends BasePage<PersonalLoanPage>
@@ -28,7 +28,7 @@ public class PersonalLoanPage extends BasePage<PersonalLoanPage>
 
 	public static PersonalLoanPage open()
 	{
-		new PersonalLoanPage().get(personalLoanPageURL);
+		new PersonalLoanPage().get(uriPersonalLoanPage);
 		return PageFactory.initElements(driver, PersonalLoanPage.class);
 	}
 
